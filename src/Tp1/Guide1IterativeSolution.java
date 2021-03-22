@@ -1,3 +1,5 @@
+package Tp1;
+
 public class Guide1IterativeSolution implements Guide1{
 
     public int exercise_1_f(int n) {

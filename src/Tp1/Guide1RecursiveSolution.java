@@ -1,3 +1,5 @@
+package Tp1;
+
 public class Guide1RecursiveSolution implements Guide1{
 
     @Override
