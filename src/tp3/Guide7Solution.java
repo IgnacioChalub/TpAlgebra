@@ -1,5 +1,6 @@
 package tp3;
 
+import tp3.utils.Matrix;
 import tp3.utils.MatrixMatrixOperation;
 import tp3.utils.MatrixVectorOperation;
 
@@ -91,7 +92,18 @@ public class Guide7Solution implements Guide7 {
 
     @Override
     public MatrixMatrixOperation exercise_3_a_ii(MatrixMatrixOperation op) {
-        throw new UnsupportedOperationException("TODO");
+        Matrix a = op.getMatrix1();
+        Matrix b = op.getMatrix2();
+        int n = a.getColumns();
+        int[][] newMatrix = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                newMatrix[i][j] = a.getValue(i,j) + b.getValue(i,j);
+            }
+        }
+        Matrix matrix = new Matrix(newMatrix);
+        op.setResult(matrix);
+        return op;
     }
 
     @Override
