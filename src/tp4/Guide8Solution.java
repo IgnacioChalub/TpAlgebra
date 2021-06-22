@@ -135,13 +135,13 @@ public class Guide8Solution implements Guide8{
         for (int k = 0; k < n; k++) {
            for (int j = k; j < n; j++) {
                 U[k][j] = A[k][j];
-                for (int p = 1; p < k-1; p++) {
+                for (int p = 0; p < k; p++) {
                     U[k][j] = U[k][j] - L[k][p]*U[p][j];
                 }
             }
             for (int i = k+1; i < n; i++) {
                 L[i][k] = A[i][k];
-                for (int p = 1; p < k-1; p++) {
+                for (int p = 0; p < k; p++) {
                     L[i][k] = L[i][k] - L[i][p]*U[p][k];
                 }
                 L[i][k] = L[i][k]/U[k][k];
@@ -150,15 +150,6 @@ public class Guide8Solution implements Guide8{
 
         MatrixContainer matrixContainer = new MatrixContainer(L,U);
         return matrixContainer;
-    }
-
-    public static void printMatrix(double[][] a){
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a.length; j++) {
-                System.out.print(a[i][j] + "  ");
-            }
-            System.out.println("  ");
-        }
     }
 
 }
