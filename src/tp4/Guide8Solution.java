@@ -83,11 +83,14 @@ public class Guide8Solution implements Guide8{
             }
             b[k] = b[k]/aux;
             int i = k+1;
-                aux = A[i][k];
-                for (int j = k; j < n; j++) {
-                    A[i][j] = A[i][j] - aux * A[k][j];
-                }
-                b[i] = b[i] - aux*b[k];
+            if(k == n-1){
+                break;
+            }
+            aux = A[i][k];
+            for (int j = k; j < n; j++) {
+                A[i][j] = A[i][j] - aux * A[k][j];
+            }
+            b[i] = b[i] - aux*b[k];
         }
 
 
@@ -119,7 +122,43 @@ public class Guide8Solution implements Guide8{
     // Exercise 10
     @Override
     public MatrixContainer exercise_10(double[][] A) {
-        throw new UnsupportedOperationException("TODO");
+        int n = A.length;
+        // first step: find L and U
+        double[][] L = new double[n][n];
+        double[][] U = new double[n][n];
+
+        // L tiene 1 en la diagonal
+        for (int i = 0; i < n; i++) {
+            L[i][i] = 1;
+        }
+
+        for (int k = 0; k < n; k++) {
+           for (int j = k; j < n; j++) {
+                U[k][j] = A[k][j];
+                for (int p = 1; p < k-1; p++) {
+                    U[k][j] = U[k][j] - L[k][p]*U[p][j];
+                }
+            }
+            for (int i = k+1; i < n; i++) {
+                L[i][k] = A[i][k];
+                for (int p = 1; p < k-1; p++) {
+                    L[i][k] = L[i][k] - L[i][p]*U[p][k];
+                }
+                L[i][k] = L[i][k]/U[k][k];
+            }
+        }
+
+        MatrixContainer matrixContainer = new MatrixContainer(L,U);
+        return matrixContainer;
+    }
+
+    public static void printMatrix(double[][] a){
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length; j++) {
+                System.out.print(a[i][j] + "  ");
+            }
+            System.out.println("  ");
+        }
     }
 
 }

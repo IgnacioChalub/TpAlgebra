@@ -109,10 +109,21 @@ public class Guide8Test extends SkipRule {
     public void exercise_10() {
         double[][] A1 = {{2, -1, -2}, {-4, 6, 3}, {-4, -2, 8}};
         MatrixContainer result1 = guide8.exercise_10(A1);
+        Guide8Solution.printMatrix(result1.getLower());
+        System.out.println("+++++++++++++++");
+        Guide8Solution.printMatrix(result1.getUpper());
+        System.out.println("+++++++++++++");
+
         assertTrue(Guide8Helpers.check_lower_triangular(result1.getLower()));
         assertTrue(Guide8Helpers.check_upper_triangular(result1.getUpper()));
 
         double[][] multiplication1 = Guide7Helpers.matrix_by_matrix(result1.getLower(), result1.getUpper());
+
+        Guide8Solution.printMatrix(A1);
+        System.out.println("+++++++++++++");
+        Guide8Solution.printMatrix(multiplication1);
+
+
         assertArrayEquals(A1, multiplication1);
 
         double[][] A2 = {{2, 4, 3, 5}, {-4, -7, -5, -8}, {6, 8, 2, 9}, {4, 9, -2, 14}};
